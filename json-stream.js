@@ -1,8 +1,10 @@
-function JSONStream (cb) {
+function JSONStream (opts, cb) {
+	
 	this.cb = cb;
 	this.obj = 0;
 	this.str = false;
 	this.esc = false;
+	this.filter = opts.filter;
 }
 
 JSONStream.prototype.decode = function (str) {
@@ -30,7 +32,13 @@ JSONStream.prototype.decodeChar = function (c) {
 
 	// Stop at closing bracket
 	if (!this.str && c === '}' && --this.obj === 0) {
-		this.cb(JSON.parse(this.data));
+		
+		this.data = JSON.parse(this.data);
+		
+		let match = this.filter.some(el => this.data.MESSAGE.includes(el));
+		
+		if(match) this.cb(this.data);
+        
 	}
 };
 
