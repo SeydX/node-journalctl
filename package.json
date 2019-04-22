@@ -1,5 +1,5 @@
 {
-  "name": "journalctl",
+  "name": "@seydx/journalctl",
   "version": "1.0.0",
   "description": "Module for consuming the Systemd Journal",
   "main": "journalctl.js",
@@ -13,15 +13,15 @@
     "test": "happiness && jest",
     "watch": "jest --watchAll"
   },
-  "author": "Juergen Fitschen <me@jue.yt>",
+  "author": "Juergen Fitschen <me@jue.yt> & SeydX",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jue89/node-journalctl.git"
+    "url": "git+https://github.com/SeydX/node-journalctl.git"
   },
   "bugs": {
-    "url": "https://github.com/jue89/node-journalctl/issues"
+    "url": "https://github.com/SeydX/node-journalctl/issues"
   },
-  "homepage": "https://github.com/jue89/node-journalctl#readme",
+  "homepage": "https://github.com/SeydX/node-journalctl#readme",
   "license": "MIT",
   "devDependencies": {
     "happiness": "^10.0.2",
