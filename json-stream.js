@@ -35,9 +35,12 @@ JSONStream.prototype.decodeChar = function (c) {
 		
 		this.data = JSON.parse(this.data);
 		
-		let match = this.filter.some(el => this.data.MESSAGE.includes(el));
-		
-		if(match) this.cb(this.data);
+		if(this.filter){
+		  let match = this.filter.some(el => this.data.MESSAGE.includes(el));
+		  if(match) this.cb(this.data);
+		} else {
+		  this.cb(this.data);
+		}
         
 	}
 };
