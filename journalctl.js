@@ -7,10 +7,20 @@ function Journalctl (opts) {
 	EventEmitter.call(this);
 
 	// Decode opts
-	const args = ['-f', '-o', 'json'];
+	const args = ['-f', '-o', 'json', '--since', 'now'];
+	
 	if (opts === undefined) opts = {};
-	if (opts.identifier) args.push('-t', opts.identifier);
-	if (opts.unit) args.push('-u', opts.unit);
+	
+	if (opts.identifier) {		
+		if (!(opts.identifier instanceof Array)) opts.identifier = [opts.identifier];
+		opts.identifier.forEach((f) => args.push('-t', f));		
+	}
+	
+	if (opts.unit) {		
+		if (!(opts.unit instanceof Array)) opts.unit = [opts.unit];
+		opts.unit.forEach((f) => args.push('-u', f));		
+	}
+	
 	if (opts.filter) {
 		if (!(opts.filter instanceof Array)) opts.filter = [opts.filter];
 	}
