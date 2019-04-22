@@ -13,14 +13,13 @@ function Journalctl (opts) {
 	if (opts.unit) args.push('-u', opts.unit);
 	if (opts.filter) {
 		if (!(opts.filter instanceof Array)) opts.filter = [opts.filter];
-		opts.filter.forEach((f) => args.push(f));
 	}
 
 	// Start journalctl
 	this.journalctl = childProcess.spawn('journalctl', args);
 
 	// Setup decoder
-	const decoder = new JSONStream((e) => {
+	const decoder = new JSONStream(opts,(e) => {
 		this.emit('event', e);
 	});
 	this.journalctl.stdout.on('data', (chunk) => {
