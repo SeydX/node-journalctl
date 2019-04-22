@@ -33,13 +33,15 @@ JSONStream.prototype.decodeChar = function (c) {
 	// Stop at closing bracket
 	if (!this.str && c === '}' && --this.obj === 0) {
 		
-		this.data = JSON.parse(this.data);
+		if(typeof JSON.parse(this.data).MESSAGE === 'string'){
+		  this.data = JSON.parse(this.data);
 		
-		if(this.filter){
-		  let match = this.filter.some(el => this.data.MESSAGE.includes(el));
-		  if(match) this.cb(this.data);
-		} else {
-		  this.cb(this.data);
+		  if(this.filter){
+		    let match = this.filter.some(el => this.data.MESSAGE.includes(el));
+		    if(match) this.cb(this.data);
+		  } else {
+		    this.cb(this.data);
+		  }
 		}
         
 	}
